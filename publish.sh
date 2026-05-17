@@ -60,7 +60,7 @@ echo
 
 # ── version prompt ────────────────────────────────────────────────────────────
 
-latest=$(git -C "$SOURCE" describe --tags --abbrev=0 2>/dev/null || echo "none")
+latest=$(git -C "$SOURCE" tag --list --sort=-version:refname 2>/dev/null | head -1 || echo "none")
 
 if [[ "$latest" =~ ^v([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
   suggested="v${BASH_REMATCH[1]}.${BASH_REMATCH[2]}.$((BASH_REMATCH[3] + 1))"
